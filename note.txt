@@ -1,0 +1,31 @@
+client side
+cd gift-suggestion
+npm run dev
+
+start server side
+cd gift-suggestion/backend
+uvicorn main:app --reload
+
+Test server on Postman
+
+Method: POST
+- URL: http://localhost:8000/api/generate-gifts
+- Headers:
+  - Key: Content-Type
+  - Value: application/json
+  - Authorization : Bearer xxx
+- Body: Select "raw" and "JSON", then use this sample request:
+
+```
+{
+    "gender": "female",
+    "mbtiType": "INFJ",
+    "auraColor": "purple"
+}
+```
+
+
+Progress check
+[/] API is working but the answer is too long
+[ ] Construct parameter to send to the GenAI input
+[ ]
