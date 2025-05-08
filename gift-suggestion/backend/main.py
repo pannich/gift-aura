@@ -31,7 +31,7 @@ class GiftRequest(BaseModel):
 async def root():
     return {"message": "Welcome to the Gift Suggestion API!"}
 
-@app.post("/api/generate-gifts-advanced")
+@app.post("/api/generate-gifts")
 async def generate_gifts_advanced(request: GiftRequest):
 
     try:
