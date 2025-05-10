@@ -4,10 +4,11 @@ import { GiftForm } from './components/GiftForm'
 function App() {
   return (
     <div className="container">
-      <h1>Your Gift Aura...</h1>
-      <GiftForm />
+        <p className="title">˖ ☘︎.𓂃˖ ݁𖥔˖ Gift Aura .𖥔 ݁ ˖𓂃.☘︎ ݁˖</p>
+        <GiftForm />
     </div>
   )
+
 }
 
 export default App

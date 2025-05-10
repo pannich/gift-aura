@@ -1,10 +1,6 @@
 import { useState } from "react";
-
-interface FormData {
-  gender: string;
-  mbtiType: string;
-  auraColor: string;
-}
+import StepForm from "./StepForm";
+import { FormData } from "../api/type";
 
 export function GiftForm() {
   type PageState = "form" | "loading" | "result";
@@ -42,56 +38,25 @@ export function GiftForm() {
     await generateGifts();
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  // ---- Render gift idea page ----
-  if (pageState === "result") {
-    return (
-      <div
-        className="result-box"
-        style={{
-          maxWidth: "400px",
-          margin: "0 auto",
-          padding: "20px",
-          border: "1px solid #ccc",
-          borderRadius: "8px",
-          backgroundColor: "#f9f9f9",
-        }}
-      >
-        <h2>Gift Ideas:</h2>
-        <p>{giftIdea}</p>
-
-        <div
-          style={{
-            marginTop: "20px",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <button onClick={() => setPageState("form")}>Back</button>
-          <button onClick={generateGifts}>Generate New Gifts</button>
-        </div>
-      </div>
-    );
-  }
-
   if (pageState === "loading") {
     return <p>Generating gift ideas...</p>;
   }
 
   if (pageState === "form") {
     return (
-      <>
-        <div className="bg-red-500 text-white p-4">Tailwind is working!</div>
-        <form
-          onSubmit={handleSubmit}
-          className="gift-form"
+      <StepForm
+      formData={formData}
+      setFormData={setFormData}
+      handleSubmit={handleSubmit}
+    />
+    );
+  }
+
+    // ---- Render gift idea page ----
+    if (pageState === "result") {
+      return (
+        <div
+          className="result-box"
           style={{
             maxWidth: "400px",
             margin: "0 auto",
@@ -101,76 +66,21 @@ export function GiftForm() {
             backgroundColor: "#f9f9f9",
           }}
         >
-          <div className="form-group">
-            <label htmlFor="gender">Gender:</label>
-            <select
-              id="gender"
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
+          <h2>Gift Ideas:</h2>
+          <p>{giftIdea}</p>
 
-          <div className="form-group">
-            <label htmlFor="mbtiType">MBTI Type:</label>
-            <select
-              id="mbtiType"
-              name="mbtiType"
-              value={formData.mbtiType}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select MBTI Type</option>
-              <option value="INTJ">INTJ</option>
-              <option value="INTP">INTP</option>
-              <option value="ENTJ">ENTJ</option>
-              <option value="ENTP">ENTP</option>
-              <option value="INFJ">INFJ</option>
-              <option value="INFP">INFP</option>
-              <option value="ENFJ">ENFJ</option>
-              <option value="ENFP">ENFP</option>
-              <option value="ISTJ">ISTJ</option>
-              <option value="ISFJ">ISFJ</option>
-              <option value="ESTJ">ESTJ</option>
-              <option value="ESFJ">ESFJ</option>
-              <option value="ISTP">ISTP</option>
-              <option value="ISFP">ISFP</option>
-              <option value="ESTP">ESTP</option>
-              <option value="ESFP">ESFP</option>
-            </select>
+          <div
+            style={{
+              marginTop: "20px",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <button onClick={() => setPageState("form")}>Back</button>
+            <button onClick={generateGifts}>Generate New Gifts</button>
           </div>
+        </div>
+      );
+    }
 
-          <div className="form-group">
-            <label htmlFor="auraColor">Aura Color:</label>
-            <select
-              id="auraColor"
-              name="auraColor"
-              value={formData.auraColor}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select Aura Color</option>
-              <option value="red">Red</option>
-              <option value="blue">Blue</option>
-              <option value="green">Green</option>
-              <option value="yellow">Yellow</option>
-              <option value="purple">Purple</option>
-              <option value="orange">Orange</option>
-              <option value="pink">Pink</option>
-            </select>
-          </div>
-
-          <button type="submit" className="submit-button">
-            Generate Gift Ideas
-          </button>
-        </form>
-      </>
-    );
-  }
 }

@@ -5,6 +5,13 @@
   text-align: center;
 }
 
+.app-background {
+  background-image: url('/bg-aura.png');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh; /* ensures full height */
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -54,10 +61,12 @@ h1 {
 }
 
 .gift-form {
-  background-color: #fff;
+  width: 400px;
+  height: 200px;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: transparent;
 }
 
 .form-group {
